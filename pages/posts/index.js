@@ -27,10 +27,11 @@ export default PostList
 export async function getStaticProps() {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts')
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     return {
         props: {
-            posts: data.slice(0, 3)
+            // posts: data
+            posts: data
         }
     }
 }
