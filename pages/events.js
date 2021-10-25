@@ -16,7 +16,7 @@ function EventList({eventList}) {
             <h1>List of Events</h1>
             {
                 events.map(event =>(
-                    <div key={event.key}>
+                    <div key={event.id}>
                         <h2>
                             {event.id} {event.title} {event.data} | {event.category}
                         </h2>
