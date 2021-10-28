@@ -2,7 +2,7 @@ import { getSession, useSession } from "next-auth/client";
 
 function Blog({ data }) {
     const [session] = useSession()
-    console.log({ session })
+    // console.log({ session })
     return (
         <>
             <h1>
