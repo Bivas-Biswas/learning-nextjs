@@ -1,13 +1,15 @@
 import Link from 'next/link'
-
+import { signIn, signOut, useSession } from "next-auth/client";
 
 function Navbar() {
+    const [session, loading] = useSession()
+    // console.log({ session, loading })
     return (
         <nav className='header'>
             <h1 className='logo'>
                 <a href='#'>NextAuth</a>
             </h1>
-            <ul className={`main-nav`}>
+            <ul className={`main-nav ${!session && loading ? 'loading' : 'loaded'}`}>
                 <li>
                     <Link href='/'>
                         <a>Home</a>
@@ -24,21 +26,37 @@ function Navbar() {
                     </Link>
                 </li>
 
-                <li>
-                    <Link href='#'>
-                        <a>
-                            Sign In
-                        </a>
-                    </Link>
-                </li>
+                {
+                    !loading && !session && (
+                        <li>
+                            <Link href='/api/auth/signin'>
+                                <a onClick={e => {
+                                    e.preventDefault()
+                                    signIn('github')
+                                }}>
+                                    Sign In
+                                </a>
+                            </Link>
+                        </li>
+                    )
+                }
 
-                <li>
-                    <Link href='#'>
-                        <a>
-                            Sign Out
-                        </a>
-                    </Link>
-                </li>
+                {
+                    session && (
+                        <li>
+                            <Link href='/api/auth/signout'>
+                                <a onClick={e => {
+                                    e.preventDefault()
+                                    signOut()
+                                }}>
+                                    Sign Out
+                                </a>
+                            </Link>
+                        </li>
+                    )
+                }
+
+
             </ul>
         </nav>
     )
