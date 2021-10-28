@@ -6,6 +6,7 @@ function Dashboard() {
     useEffect(() => {
         const securePage = async () => {
             const session = await getSession()
+            // console.log(session)
             if (!session) {
                 signIn()
             } else {

@@ -1,9 +1,12 @@
 import styles from '../styles/Home.module.css'
+import { useSession } from "next-auth/client";
 
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <h1>Hello World</h1> 
-    </div>
-  )
+    const [session, loading] = useSession()
+    console.log({ session, loading })
+    return (
+        <div className={styles.container}>
+            <h1>Hello {session ? `, ${session.user.name}` : ""}</h1>
+        </div>
+    )
 }
